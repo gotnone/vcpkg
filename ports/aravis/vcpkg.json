@@ -1,0 +1,36 @@
+{
+  "name": "aravis",
+  "version": "0.8.22",
+  "description": "Aravis is a glib/gobject based library for video acquisition using Genicam cameras.",
+  "homepage": "https://github.com/AravisProject/aravis",
+  "license": "LGPL-2.1-or-later",
+  "dependencies": [
+    "glib",
+    "libxml2",
+    {
+      "name": "vcpkg-tool-meson",
+      "host": true
+    },
+    "zlib"
+  ],
+  "features": {
+    "gst-plugin": {
+      "description": "Build aravis viewer tool",
+      "dependencies": [
+        "gstreamer"
+      ]
+    },
+    "usb": {
+      "description": "build with USB support",
+      "dependencies": [
+        "libusb"
+      ]
+    },
+    "viewer": {
+      "description": "Build aravis viewer tool",
+      "dependencies": [
+        "gtk"
+      ]
+    }
+  }
+}

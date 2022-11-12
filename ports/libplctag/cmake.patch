@@ -1,0 +1,27 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7962865..be67467 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -535,9 +535,6 @@ elseif (BUILD_EXAMPLES)
+         set_target_properties(simple_cpp PROPERTIES LINK_FLAGS "${BASE_LINK_FLAGS}")
+     endif()
+ 
+-    # Generate files from templates
+-    CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/libplctag.pc.in" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libplctag.pc" @ONLY)
+-
+     # build the GitHub Actions config file
+     CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/.github/workflows/ci.yml.in" "${CMAKE_CURRENT_SOURCE_DIR}/.github/workflows/ci.yml" @ONLY)
+ 
+@@ -618,9 +615,9 @@ if(ANDROID_BUILD)
+     message("Skipping package config and header file copy for Android build.")
+ else()
+     install(FILES "${lib_SRC_PATH}/libplctag.h" DESTINATION include)
+-    if(EXISTS "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libplctag.pc")
+-        install(FILES "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libplctag.pc" DESTINATION "lib${LIB_SUFFIX}/pkgconfig")
+-    endif()
++    # Generate files from templates
++    CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/libplctag.pc.in" "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libplctag.pc" @ONLY)
++    install(FILES "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libplctag.pc" DESTINATION "lib/pkgconfig")
+ endif(ANDROID_BUILD)
+ 
+ macro(print_all_variables)
